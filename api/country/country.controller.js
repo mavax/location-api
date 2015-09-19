@@ -1,7 +1,5 @@
 'use strict';
 
-// var config = require('../../config/environment/' + process.env.NODE_ENV);
-
 var countryCollection = require('../../lib/country');
 
 function CountryController() {}

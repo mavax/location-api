@@ -2,17 +2,11 @@
 
 var chai = require('chai');
 var expect = chai.expect;
-var sinon = require('sinon');
-var sinonChai = require("sinon-chai");
-chai.use(sinonChai);
 
-var Country = require('../../lib/country');
-var CountryDb = require('../../lib/country.db');
 var Adapter = require('../../lib/country.adapter');
 
-describe('Lib Country', function CountryTest() {
-    describe('fetch', function () {
-        var readerStub, adapterStub;
+describe('Country Adapter', function CountryAdapterTest() {
+    describe('toApi', function () {
         var host = "24.24.24.24";
         var record = {
             continent: {
@@ -62,26 +56,15 @@ describe('Lib Country', function CountryTest() {
             country: {
                 geoname_id: 6252001,
                 iso_code: 'US',
-                en: 'North America',
+                name: 'United States',
                 language: 'en'
             },
             host: host
         };
 
-        before(function() {
-            readerStub = sinon.stub(CountryDb, "lookup");
-            adapterStub = sinon.stub(Adapter, "toApi");
-        });
-
-        after(function() {
-            CountryDb.lookup.restore();
-            Adapter.toApi.restore();
-        });
 
         it('should call lookup on the reader', function (done) {
-            readerStub.withArgs(host).returns(record);
-            adapterStub.withArgs(host, record).returns(apiRecord);
-            expect(Country.fetch(host)).to.deep.equal(apiRecord);
+            expect(Adapter.toApi(host, record)).to.deep.equal(apiRecord);
             done();
         });
     });
