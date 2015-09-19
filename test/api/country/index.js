@@ -8,19 +8,30 @@ var locationApi = require('../../../location-api');
 
 describe('Country Api', function CountryApiTest () {
     it('should respond with an array of objects', function (done) {
-        var host = "24.24.24.24";
-        var apiRecord = {
-            country: {
-                geoname_id: 6252001,
-                iso_code: 'US',
-                name: 'United States',
-                language: 'en'
+        var hosts = "24.24.24.24,94.94.94.94";
+        var apiRecords = [
+            {
+                country: {
+                    geoname_id: 6252001,
+                    iso_code: 'US',
+                    name: 'United States',
+                    language: 'en'
+                },
+                host: "24.24.24.24"
             },
-            host: host
-        };
+            {
+                country: {
+                    geoname_id: 3175395,
+                    iso_code: 'IT',
+                    name: 'Italy',
+                    language: 'en'
+                },
+                host: "94.94.94.94"
+            }
+        ];
 
         request(locationApi)
-            .get('/api/country/' + host)
+            .get('/api/country/' + hosts)
             .expect(200)
             .expect('Content-Type', /json/)
             .end(function (error, response) {
@@ -28,8 +39,7 @@ describe('Country Api', function CountryApiTest () {
                     return done(error);
                 }
                 expect(response.body).to.be.an('array');
-                expect(response.body.length).to.equal(1);
-                expect(response.body[0]).to.deep.equal(apiRecord);
+                expect(response.body).to.deep.equal(apiRecords);
                 done();
             });
     });

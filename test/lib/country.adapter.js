@@ -63,7 +63,7 @@ describe('Country Adapter', function CountryAdapterTest() {
         };
 
 
-        it('should call lookup on the reader', function (done) {
+        it('should return an api compatible record', function (done) {
             expect(Adapter.toApi(host, record)).to.deep.equal(apiRecord);
             done();
         });

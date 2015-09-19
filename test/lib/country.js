@@ -78,7 +78,7 @@ describe('Lib Country', function CountryTest() {
             Adapter.toApi.restore();
         });
 
-        it('should call lookup on the reader', function (done) {
+        it('should return an api compatible record using db and adapter', function (done) {
             readerStub.withArgs(host).returns(record);
             adapterStub.withArgs(host, record).returns(apiRecord);
             expect(Country.fetch(host)).to.deep.equal(apiRecord);
