@@ -4,6 +4,6 @@
 
 function Country() {}
 
-//Country.prototype.MethodName = function(arguments) {};
+// Country.prototype.MethodName = function(arguments) {};
 
 module.exports = new Country();
