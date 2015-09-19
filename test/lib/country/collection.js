@@ -67,6 +67,10 @@ describe('Country Collection', function CountryTest() {
             },
             host: host
         };
+        var errorRecord = {
+            error: "The address " + host + " is not in the database.",
+            host: host
+        };
 
         before(function() {
             readerStub = sinon.stub(CountryDb, "lookup");
@@ -82,6 +86,12 @@ describe('Country Collection', function CountryTest() {
             readerStub.withArgs(host).returns(record);
             adapterStub.withArgs(host, record).returns(apiRecord);
             expect(Collection.fetch(host)).to.deep.equal(apiRecord);
+            done();
+        });
+
+        it('should return an error object if not present in DB', function (done) {
+            readerStub.withArgs(host).returns(undefined);
+            expect(Collection.fetch(host)).to.deep.equal(errorRecord);
             done();
         });
     });

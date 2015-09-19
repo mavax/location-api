@@ -96,6 +96,9 @@ var documentation = {
                 },
                 "host": {
                     "type": "string"
+                },
+                "error": {
+                    "type": "string"
                 }
             }
         },
@@ -127,6 +130,9 @@ var documentation = {
                     "$ref": "#/definitions/City"
                 },
                 "host": {
+                    "type": "string"
+                },
+                "error": {
                     "type": "string"
                 }
             }

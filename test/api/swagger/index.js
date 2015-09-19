@@ -101,6 +101,9 @@ describe('Controller SwaggerController', function SwaggerControllerTest () {
                     },
                     "host": {
                         "type": "string"
+                    },
+                    "error": {
+                        "type": "string"
                     }
                 }
             },
@@ -132,6 +135,9 @@ describe('Controller SwaggerController', function SwaggerControllerTest () {
                         "$ref": "#/definitions/City"
                     },
                     "host": {
+                        "type": "string"
+                    },
+                    "error": {
                         "type": "string"
                     }
                 }
