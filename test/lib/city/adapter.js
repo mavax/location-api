@@ -2,19 +2,26 @@
 
 var chai = require('chai');
 var expect = chai.expect;
-var sinon = require('sinon');
-var sinonChai = require("sinon-chai");
-chai.use(sinonChai);
 
-var Collection = require('../../../lib/country/collection');
-var CountryDb = require('../../../lib/country/db');
-var Adapter = require('../../../lib/country/adapter');
+var Adapter = require('../../../lib/city/adapter');
 
-describe('Country Collection', function CountryTest() {
-    describe('fetch', function () {
-        var readerStub, adapterStub;
+describe('City Adapter', function CityAdapterTest() {
+    describe('toApi', function () {
         var host = "24.24.24.24";
         var record = {
+            city: {
+                geoname_id: 5140405,
+                names: {
+                    de: 'Syracuse',
+                    en: 'Syracuse',
+                    es: 'Siracusa',
+                    fr: 'Syracuse',
+                    ja: 'シラキューズ',
+                    'pt-BR': 'Syracuse',
+                    ru: 'Сиракьюс',
+                    'zh-CN': '锡拉丘兹'
+                }
+            },
             continent: {
                 code: 'NA',
                 geoname_id: 6255149,
@@ -43,6 +50,13 @@ describe('Country Collection', function CountryTest() {
                     'zh-CN': '美国'
                 }
             },
+            location: {
+                latitude: 43.0481,
+                longitude: -76.1474,
+                metro_code: 555,
+                time_zone: 'America/New_York'
+            },
+            postal: { code: '13202' },
             registered_country: {
                 geoname_id: 6252001,
                 iso_code: 'US',
@@ -56,32 +70,22 @@ describe('Country Collection', function CountryTest() {
                     ru: 'Сша',
                     'zh-CN': '美国'
                 }
-            }
+            },
+            subdivisions: [
+                { geoname_id: 5128638, iso_code: 'NY', names: {} }
+            ]
         };
         var apiRecord = {
-            country: {
-                geoname_id: 6252001,
-                iso_code: 'US',
-                name: 'North America',
+            city: {
+                geoname_id: 5140405,
+                name: 'Syracuse',
                 language: 'en'
             },
             host: host
         };
 
-        before(function() {
-            readerStub = sinon.stub(CountryDb, "lookup");
-            adapterStub = sinon.stub(Adapter, "toApi");
-        });
-
-        after(function() {
-            CountryDb.lookup.restore();
-            Adapter.toApi.restore();
-        });
-
-        it('should return an api compatible record using db and adapter', function (done) {
-            readerStub.withArgs(host).returns(record);
-            adapterStub.withArgs(host, record).returns(apiRecord);
-            expect(Collection.fetch(host)).to.deep.equal(apiRecord);
+        it('should return an api compatible record', function (done) {
+            expect(Adapter.toApi(host, record)).to.deep.equal(apiRecord);
             done();
         });
     });
