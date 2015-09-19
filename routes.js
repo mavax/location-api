@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Main application routes
  */
@@ -11,5 +9,7 @@ module.exports = function appRoutes(app) {
     app.use(express.static(__dirname + '/public'));
 
     app.use('/api/country', require('./api/country'));
+
+    app.use('/api', require('./api/swagger'));
 
 };
