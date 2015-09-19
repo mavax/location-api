@@ -1,10 +1,10 @@
 'use strict';
 
 var express = require('express');
-// var controller = require('./country.controller');
+var controller = require('./country.controller');
 
 var router = express.Router();
 
-// router.httpVerb('/subroute', controller.MethodName);
+router.get('/:hosts', controller.index);
 
 module.exports = router;

@@ -4,6 +4,9 @@
 
 function CountryController() {}
 
-// CountryController.prototype.MethodName = function (req, res) {};
+CountryController.prototype.index = function (req, res) {
+    var hosts = req.params.hosts.split(",");
+    res.json(hosts);
+};
 
 module.exports = new CountryController();
