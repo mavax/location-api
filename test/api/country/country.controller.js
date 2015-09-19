@@ -7,7 +7,7 @@ var sinonChai = require("sinon-chai");
 chai.use(sinonChai);
 
 var countryController = require('../../../api/country/country.controller');
-var countryCollection = require('../../../lib/country');
+var countryCollection = require('../../../lib/country/collection');
 
 describe('Controller countryController', function CountryControllerTest () {
     describe('index action', function IndexAction () {

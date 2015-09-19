@@ -1,6 +1,6 @@
 'use strict';
 
-var countryCollection = require('../../lib/country');
+var countryCollection = require('../../lib/country/collection');
 
 function CountryController() {}
 
